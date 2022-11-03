@@ -22,7 +22,7 @@ namespace ProjectLibraryDAL
             bookList.BookName = bookName;
             bookList.Author = author;
             bookList.YearOfPublication = yearOfPublication;
-            bookList.TotalQuantity = totalQuantity; 
+            bookList.TotalQuantity = totalQuantity;
             bookList.AvailableQuantity = totalQuantity;
             try
             {
@@ -34,7 +34,7 @@ namespace ProjectLibraryDAL
             catch
             {
                 status = false;
-                return false;
+                return status;
             }
         }
         public bool AddMember(String memberName, String phone, string address)
@@ -55,7 +55,7 @@ namespace ProjectLibraryDAL
             catch
             {
                 status = false;
-                return false;
+                return status;
             }
         }
         public bool AddLog(int? memberid, int? bookid)
@@ -69,13 +69,48 @@ namespace ProjectLibraryDAL
             {
                 context.LendingLog.Add(log);
                 context.SaveChanges();
-                status = true;
-                return status;
+                ProjectLibraryRepository repository = new ProjectLibraryRepository();
+                bool result = repository.UpdateQuantityWhenLog(bookid);
+                if (result)
+                {
+                    status = true;
+                    return status;
+                }
+                else
+                {
+                    status = false;
+                    return status;
+                }
+
             }
             catch
             {
                 status = false;
-                return false;
+                return status;
+            }
+        }
+        public bool UpdateQuantityWhenLog(int? bookId)
+        {
+            bool result = false;
+            try
+            {
+                BookList bookList = context.BookList.Find(bookId);
+                if (bookList != null)
+                {
+                    bookList.AvailableQuantity = bookList.AvailableQuantity - 1;
+                    context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                return result;
+            }
+            catch
+            {
+                result = false;
+                return result;
             }
         }
     }
