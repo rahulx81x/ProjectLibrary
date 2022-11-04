@@ -14,7 +14,45 @@ namespace ProjectLibraryDAL
         {
             context = new ProjectLibraryDBContext();
         }
-
+         public BookList GetBookListById(int? bookId)
+         {
+            try
+            {
+                BookList bookList = context.BookList.Find(bookId);
+                return bookList;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                return null;
+            }
+         }
+        public Members GetMemberById(int? memberId)
+        {
+            try
+            {
+               Members member = context.Members.Find(memberId);
+                return member;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                return null;
+            }
+        }
+        public LendingLog GetLogById(int? transactId)
+        {
+            try
+            {
+                LendingLog log = context.LendingLog.Find(transactId);
+                return log;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                return null;
+            }
+        }
         public bool AddBook(String bookName, String author, int yearOfPublication, int totalQuantity)
         {
             bool status = false;
@@ -33,6 +71,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
+                Console.WriteLine("Some Error Occured");
                 status = false;
                 return status;
             }
@@ -54,6 +93,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
+                Console.WriteLine("Some Error Occured");
                 status = false;
                 return status;
             }
@@ -85,6 +125,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
+                Console.WriteLine("Some Error Occured");
                 status = false;
                 return status;
             }
@@ -109,9 +150,115 @@ namespace ProjectLibraryDAL
             }
             catch
             {
+                Console.WriteLine("Some Error Occured");
                 result = false;
                 return result;
             }
+        }
+
+        public bool UpdateQuantity(int? bookId, int updatedValue)
+        {
+            bool result = false;
+            try
+            {
+                BookList bookList = context.BookList.Find(bookId);
+                if (bookList != null)
+                {
+                    bookList.AvailableQuantity = updatedValue;
+                    context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                return result;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                result = false;
+                return result;
+            }
+        }
+
+        public bool UpdateBookReturn(int? transactId)
+        {
+            bool result = false;
+            try
+            {
+                LendingLog log = context.LendingLog.Find(transactId); ;
+                if (log != null)
+                {
+                    log.ReturnedOn = DateTime.Today;
+                    context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                return result;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                result = false;
+                return result;
+            }
+        }
+
+        public bool RemoveMember(int? memberId)
+        {
+            bool result = false;
+            try
+            {
+                Members member = context.Members.Find(memberId);
+                if (member != null)
+                {
+                    context.Members.Remove(member);
+                    context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                return result;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                result = false;
+                return result;
+            }
+
+        }
+        public bool RemoveBook(int? bookId)
+        {
+            bool result = false;
+            try
+            {
+                BookList bookList = context.BookList.Find(bookId);
+                if (bookList != null)
+                {
+                    context.BookList.Remove(bookList);
+                    context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                return result;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured");
+                result = false;
+                return result;
+            }
+
         }
     }
 }
