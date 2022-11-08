@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectLibraryDAL.Models;
+using ProjectLibraryMVCApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace ProjectLibraryMVCApp
 {
@@ -24,6 +28,9 @@ namespace ProjectLibraryMVCApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddAutoMapper(x => x.AddProfile(new LibraryMapper()));
+
+            services.AddDbContext<ProjectLibraryDBContext>(option=> option.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ProjectLibraryDB;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +57,7 @@ namespace ProjectLibraryMVCApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Manager}/{action=GetAllBooks}/{id?}");
             });
         }
     }
