@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Numerics;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Query;
 using ProjectLibraryDAL.Models;
 
@@ -13,6 +16,19 @@ namespace ProjectLibraryDAL
         public ProjectLibraryRepository()
         {
             context = new ProjectLibraryDBContext();
+        }
+
+        public List<BookList> GetAllBooks()
+        {
+            try
+            {
+                var books = context.BookList.ToList();
+                return books;
+            }
+            catch
+            {
+                return null;
+            }
         }
          public BookList GetBookListById(int? bookId)
          {
