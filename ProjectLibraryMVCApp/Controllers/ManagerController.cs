@@ -19,6 +19,7 @@ namespace ProjectLibraryMVCApp.Controllers
             _mapper = mapper;
             repository = new ProjectLibraryRepository();
         }
+//to fetch book list
         public ActionResult GetAllBooks()
         {
             List<ProjectLibraryDAL.Models.BookList> lstDAL = repository.GetAllBooks();
@@ -36,7 +37,8 @@ namespace ProjectLibraryMVCApp.Controllers
                 return View("Error");
             }
         }
-    
+  
+//to add book to booklist
         public ActionResult AddBook()
         {
             return View();
