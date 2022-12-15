@@ -30,7 +30,21 @@ namespace ProjectLibraryDAL
                 return null;
             }
         }
-         public BookList GetBookListById(int? bookId)
+
+        public List<LendingLog> GetAllLogs()
+        {
+            try
+            {
+                var logs = context.LendingLog.ToList();
+                return logs;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public BookList GetBookListById(int? bookId)
          {
             try
             {
@@ -125,15 +139,18 @@ namespace ProjectLibraryDAL
             {
                 context.LendingLog.Add(log);
                 context.SaveChanges();
+                status=true;
                 ProjectLibraryRepository repository = new ProjectLibraryRepository();
                 bool result = repository.UpdateQuantityWhenLog(bookid);
                 if (result)
                 {
+
                     status = true;
                     return status;
                 }
                 else
                 {
+                    Console.WriteLine("Some Error Occured else block addlog");
                     status = false;
                     return status;
                 }
@@ -141,7 +158,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
-                Console.WriteLine("Some Error Occured");
+                Console.WriteLine("Some Error Occured catch block addlog");
                 status = false;
                 return status;
             }
@@ -160,13 +177,14 @@ namespace ProjectLibraryDAL
                 }
                 else
                 {
+                    Console.WriteLine("Some Error Occured else block updatequantwhenlog");
                     result = false;
                 }
                 return result;
             }
             catch
             {
-                Console.WriteLine("Some Error Occured");
+                Console.WriteLine("Some Error Occured catch updatequantwhenlog");
                 result = false;
                 return result;
             }
