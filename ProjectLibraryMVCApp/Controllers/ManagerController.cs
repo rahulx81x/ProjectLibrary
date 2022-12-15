@@ -19,6 +19,14 @@ namespace ProjectLibraryMVCApp.Controllers
             _mapper = mapper;
             repository = new ProjectLibraryRepository();
         }
+
+//Landing Page for manager
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
 //to fetch book list
         public ActionResult GetAllBooks()
         {

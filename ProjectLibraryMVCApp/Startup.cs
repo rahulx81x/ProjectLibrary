@@ -57,7 +57,7 @@ namespace ProjectLibraryMVCApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Manager}/{action=GetAllBooks}/{id?}");
+                    pattern: "{controller=Manager}/{action=Index}/{id?}");
             });
         }
     }
