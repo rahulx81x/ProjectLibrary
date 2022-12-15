@@ -1,0 +1,53 @@
+﻿@model ProjectLibraryMVCApp.Models.LendingLog
+
+@{
+    ViewData["Title"] = "AddLog";
+}
+
+<h1>AddLog</h1>
+
+<h4>LendingLog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveAddLog">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TransactId" class="control-label"></label>
+                <input asp-for="TransactId" class="form-control" value=0 />
+                <span asp-validation-for="TransactId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberId" class="control-label"></label>
+                <input asp-for="MemberId" class="form-control" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookId" class="control-label"></label>
+                <input asp-for="BookId" class="form-control" />
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BorrowedOn" class="control-label"></label>
+                <input asp-for="BorrowedOn" class="form-control" value=0 />
+                <span asp-validation-for="BorrowedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnedOn" class="control-label"></label>
+                <input asp-for="ReturnedOn" class="form-control" />
+                <span asp-validation-for="ReturnedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllLogs">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

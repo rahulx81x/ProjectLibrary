@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProjectLibraryMVCApp.Models.LendingLog>
+
+@{
+    ViewData["Title"] = "GetAllLogs";
+}
+
+<h1>GetAllLogs</h1>
+
+<p>
+    <a asp-action="AddLog">Add Another Log</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnedOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnedOn)
+            </td>
+            <td>
+                @Html.ActionLink("Return Book", "ReturnBook", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Update Quantity", "UpdateQuantity", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

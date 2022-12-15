@@ -10,6 +10,8 @@ namespace ProjectLibraryMVCApp.Repository
         {
             CreateMap<BookList, Models.BookList>();
             CreateMap<Models.BookList, BookList>();
+            CreateMap<LendingLog, Models.LendingLog>();
+            CreateMap<Models.LendingLog, LendingLog>();
         }
     }
     
