@@ -84,7 +84,7 @@ namespace ProjectLibraryMVCApp.Controllers
             }
         }
 
-// to lend a book/add transaction
+// to lend a book/add transaction log
         public ActionResult AddLog()
         {
             return View();
