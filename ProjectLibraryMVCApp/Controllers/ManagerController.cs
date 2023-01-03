@@ -90,9 +90,9 @@ namespace ProjectLibraryMVCApp.Controllers
             return View();
         }
 
-        public ActionResult SaveAddLog(Models.LendingLog log)
+        public ActionResult SaveAddLog(int memberId,int bookId)
         {
-            bool result = repository.AddLog(log.MemberId, log.BookId);
+            bool result = repository.AddLog(memberId, bookId);
             if (result)
             {
                 return RedirectToAction("GetAllLogs");
