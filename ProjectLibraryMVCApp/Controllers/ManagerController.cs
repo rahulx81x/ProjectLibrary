@@ -65,6 +65,27 @@ namespace ProjectLibraryMVCApp.Controllers
                 return View("Error");
             }
         }
+
+//to get all members
+
+        public ActionResult GetAllMembers()
+        {
+            List<ProjectLibraryDAL.Models.Members> lstDAL = repository.GetAllMembers();
+            List<ProjectLibraryMVCApp.Models.Members> lstMVC = new List<ProjectLibraryMVCApp.Models.Members>();
+            try
+            {
+                foreach (var item in lstDAL)
+                {
+                    lstMVC.Add(_mapper.Map<Models.Members>(item));
+                }
+                return View(lstMVC);
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+
 //to add book to booklist
         public ActionResult AddBook()
         {
@@ -102,6 +123,26 @@ namespace ProjectLibraryMVCApp.Controllers
                 return View("Error");
             }
 
+        }
+// Returning book
+
+         [HttpPost]
+         public ActionResult ReturnBook(Models.LendingLog logItem)
+        {
+            return View(logItem);
+        }
+
+        public ActionResult SaveReturnBook(int transactId)
+        {
+            bool result = repository.UpdateBookReturn(transactId);
+            if (result)
+            {
+                return RedirectToAction("GetAllLogs");
+            }
+            else
+            {
+                return View("Error");
+            }
         }
     }
 }

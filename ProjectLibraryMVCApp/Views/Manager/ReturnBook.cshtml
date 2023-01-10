@@ -1,0 +1,50 @@
+﻿@model ProjectLibraryMVCApp.Models.LendingLog
+
+@{
+    ViewData["Title"] = "ReturnBook";
+}
+
+<h1>ReturnBook</h1>
+
+<h3>Are you sure you want to return this?</h3>
+<div>
+    <h4>Lending Log</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TransactId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MemberId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MemberId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BorrowedOn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BorrowedOn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReturnedOn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReturnedOn)
+        </dd>
+    </dl>
+    
+    <form asp-action="SaveReturnBook" asp-route-transactId="@Model.TransactId">
+        <input type="submit" value="Return Book" class="btn" /> |
+        <a asp-action="GetAllLogs">Back to List</a>
+    </form>
+</div>

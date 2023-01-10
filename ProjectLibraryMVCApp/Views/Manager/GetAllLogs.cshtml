@@ -49,8 +49,8 @@
                 @Html.DisplayFor(modelItem => item.ReturnedOn)
             </td>
             <td>
-                @Html.ActionLink("Return Book", "ReturnBook", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Update Quantity", "UpdateQuantity", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Return Book", "ReturnBook", item) |
+                    @Html.ActionLink("Update Quantity", "UpdateQuantity", new { bookId=item.BookId})
             </td>
         </tr>
 }
