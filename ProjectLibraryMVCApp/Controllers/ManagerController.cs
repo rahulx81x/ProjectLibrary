@@ -126,7 +126,6 @@ namespace ProjectLibraryMVCApp.Controllers
         }
 // Returning book
 
-         [HttpPost]
          public ActionResult ReturnBook(Models.LendingLog logItem)
         {
             return View(logItem);
