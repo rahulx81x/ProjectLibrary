@@ -44,6 +44,19 @@ namespace ProjectLibraryDAL
             }
         }
 
+        public List<Members> GetAllMembers()
+        {
+            try
+            {
+                var members = context.Members.ToList();
+                return members;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public BookList GetBookListById(int? bookId)
          {
             try
@@ -190,6 +203,33 @@ namespace ProjectLibraryDAL
             }
         }
 
+        public bool UpdateQuantityWhenReturn(int? bookId)
+        {
+            bool result = false;
+            try
+            {
+                BookList bookList = context.BookList.Find(bookId);
+                if (bookList != null)
+                {
+                    bookList.AvailableQuantity = bookList.AvailableQuantity + 1;
+                    context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    Console.WriteLine("Some Error Occured else block updatequantwhenlog");
+                    result = false;
+                }
+                return result;
+            }
+            catch
+            {
+                Console.WriteLine("Some Error Occured catch updatequantwhenlog");
+                result = false;
+                return result;
+            }
+        }
+
         public bool UpdateQuantity(int? bookId, int updatedValue)
         {
             bool result = false;
@@ -224,9 +264,13 @@ namespace ProjectLibraryDAL
                 LendingLog log = context.LendingLog.Find(transactId); ;
                 if (log != null)
                 {
-                    log.ReturnedOn = DateTime.Today;
-                    context.SaveChanges();
-                    result = true;
+                    bool res = UpdateQuantityWhenReturn(log.BookId);
+                    if (res)
+                    {
+                        log.ReturnedOn = DateTime.Today;
+                        context.SaveChanges();
+                        result = true;
+                    }  
                 }
                 else
                 {
@@ -236,7 +280,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
-                Console.WriteLine("Some Error Occured");
+                Console.WriteLine("Some Error Occured Update Book Return Repo");
                 result = false;
                 return result;
             }
@@ -262,7 +306,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
-                Console.WriteLine("Some Error Occured");
+                Console.WriteLine("Some Error Occured Remove Member Repo");
                 result = false;
                 return result;
             }
@@ -288,7 +332,7 @@ namespace ProjectLibraryDAL
             }
             catch
             {
-                Console.WriteLine("Some Error Occured");
+                Console.WriteLine("Some Error Occured Remove Book Repo");
                 result = false;
                 return result;
             }
