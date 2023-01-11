@@ -124,9 +124,35 @@ namespace ProjectLibraryMVCApp.Controllers
             }
 
         }
+
+// to Add a member
+        public ActionResult AddMember()
+        {
+            return View();
+        }
+
+        public ActionResult SaveAddMember(Models.Members member)
+        {
+            bool result = repository.AddMember(member.MemberName, member.Phone, member.Address);
+            if (result)
+            {
+                return RedirectToAction("GetAllMembers");
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+//Update Book
+        public ActionResult UpdateBook(Models.BookList book)
+        {
+            return View("Maintenance");
+        }
+
 // Returning book
 
-         public ActionResult ReturnBook(Models.LendingLog logItem)
+        public ActionResult ReturnBook(Models.LendingLog logItem)
         {
             return View(logItem);
         }
@@ -137,6 +163,44 @@ namespace ProjectLibraryMVCApp.Controllers
             if (result)
             {
                 return RedirectToAction("GetAllLogs");
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+// Remove Book
+        public ActionResult RemoveBook(Models.BookList book)
+        {
+            return View(book);
+        }
+
+        public ActionResult SaveRemoveBook(int bookId)
+        {
+            bool result = repository.RemoveBook(bookId);
+            if (result)
+            {
+                return RedirectToAction("GetAllBooks");
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+// Remove Book
+        public ActionResult RemoveMember(Models.Members member)
+        {
+            return View(member);
+        }
+
+        public ActionResult SaveRemoveMember(int memberId)
+        {
+            bool result = repository.RemoveMember(memberId);
+            if (result)
+            {
+                return RedirectToAction("GetAllMembers");
             }
             else
             {

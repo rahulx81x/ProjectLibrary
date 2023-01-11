@@ -1,0 +1,50 @@
+﻿@model ProjectLibraryMVCApp.Models.Members
+
+@{
+    ViewData["Title"] = "AddMember";
+}
+
+<h1>Add Member</h1>
+
+<h4>Members</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveAddMember">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MemberId" class="control-label"></label>
+                <input asp-for="MemberId" class="form-control" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberName" class="control-label"></label>
+                <input asp-for="MemberName" class="form-control" />
+                <span asp-validation-for="MemberName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberSince" class="control-label"></label>
+                <input asp-for="MemberSince" class="form-control" />
+                <span asp-validation-for="MemberSince" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllMembers">Back to List</a>
+</div>
+

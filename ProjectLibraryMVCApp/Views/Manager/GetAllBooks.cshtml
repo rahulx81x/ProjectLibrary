@@ -55,8 +55,8 @@
                 @Html.DisplayFor(modelItem => item.AvailableQuantity)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "UpdateBook", item) |
+                @Html.ActionLink("Delete", "RemoveBook", item)
             </td>
         </tr>
 }
